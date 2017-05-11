@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/layout :: head"></head>
+<body>
+
+<div id="wrapper">
+
+	<nav th:replace="admin/layout :: sidebar"></nav>
+
+	<div id="page-wrapper">
+		<div class="row">
+			<div class="col-lg-12">
+				<h3 class="page-header">Dashboard</h3>
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+		<!-- /.row -->
+
+		<div class="row">
+			<div class="col-lg-3 col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-3">
+								<i class="fa fa-user fa-5x"></i>
+							</div>
+							<div class="col-xs-9 text-right">
+								<div class="huge"><span th:text="${totalUsers}"></span></div>
+								<div>Khách hàng</div>
+							</div>
+						</div>
+					</div>
+					<a th:href="@{/admin/customer}">
+						<div class="panel-footer">
+							<span class="pull-left">Xem chi tiết</span> <span
+								class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="panel panel-green">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-3">
+								<i class="fa fa-list-alt fa-5x"></i>
+							</div>
+							<div class="col-xs-9 text-right">
+								<div class="huge"><span th:text="${totalCategories}"></span></div>
+								<div>Danh mục</div>
+							</div>
+						</div>
+					</div>
+					<a th:href="@{/admin/category}">
+						<div class="panel-footer">
+							<span class="pull-left">Xem chi tiết</span> <span
+								class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="panel panel-yellow">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-3">
+								<i class="fa fa-money fa-5x"></i>
+							</div>
+							<div class="col-xs-9 text-right">
+								<div class="huge"><span th:text="${totalProducts}"></span></div>
+								<div>Sản phẩm</div>
+							</div>
+						</div>
+					</div>
+					<a th:href="@{/admin/product}">
+						<div class="panel-footer">
+							<span class="pull-left">Xem chi tiết</span> <span
+								class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="panel panel-red">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-3">
+								<i class="fa fa-shopping-cart fa-5x"></i>
+							</div>
+							<div class="col-xs-9 text-right">
+								<div class="huge"><span th:text="${totalOrders}"></span></div>
+								<div>Đơn hàng</div>
+							</div>
+						</div>
+					</div>
+					<a th:href="@{/admin/order}">
+						<div class="panel-footer">
+							<span class="pull-left">Xem chi tiết</span> <span
+								class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-bell fa-fw"></i> Đơn hàng mới nhất
+					</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover table-striped">
+								<thead>
+									<tr>
+										<th>Mã ĐH</th>
+										<th>Khách hàng</th>
+										<th>Ngày đặt</th>
+										<th>Tổng giá trị</th>
+										<th>Tùy chọn</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="order : ${newestOrders}">
+										<td th:text="${order.id}"></td>
+										<td th:text="${order.user.name}"></td>
+										<td th:text="${#dates.format(order.created, 'dd/MM/yyyy HH:mm')}"></td>
+										<td th:text="${#numbers.formatInteger(order.total,3,'COMMA')}"></td>
+										<td>
+		                                    <div class="dropdown">
+		                                        <button class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown">
+		                                            Tùy chọn
+		                                            <span class="caret"></span>
+		                                        </button>
+		                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+		                                            <li>
+		                                            	<a th:href="@{/order/{id}(id=${order.id})}">
+		                                            		Xem đơn hàng
+		                                            	</a>
+		                                            </li>
+		                                            <li>
+		                                            	<a th:href="@{/order/{id}/update(id=${order.id})}">
+		                                            		Cập nhật đơn hàng
+		                                            	</a>
+		                                            </li>
+		                                            <li>
+		                                            	<a th:href="@{/order/{id}/cancel(id=${order.id})}">
+		                                            		Hủy đơn hàng
+		                                            	</a>
+		                                            </li>
+		                                        </ul>
+		                                    </div>
+		                                </td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.table-responsive -->
+						<a th:href="@{/admin/order}" class="btn btn-primary">Xem tất cả</a>
+					</div>
+					<!-- /.panel-body -->
+				</div>
+				<!-- /.panel -->
+			</div>
+			<!-- /.col-lg-8 -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /#page-wrapper -->
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+/* My Custom */
+.table tbody > tr > td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.table thead > tr > th {
+	text-align: center;
+}
+
+.required {
+  color: #ff0000;
+}
+
+.order-cancel {
+  color: #ff0000;
+  text-decoration: line-through;
+}
+
+.tab-pane table {
+	margin-top: 20px;
+}
+
+.error {
+	color: #ed4956;
+	font-size: 14px;
+}
+
+.success {
+	color: #4e9f2e;
+	font-size: 14px;
+}
+
+.field-error {
+	border-color: #ed4956;
+	margin-bottom: 5px;
+}
+
+.required {
+	color: #ed4956;
+}

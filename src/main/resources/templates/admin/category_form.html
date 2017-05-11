@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/layout :: head"></head>
+<body>
+
+<div id="wrapper">
+
+	<nav th:replace="admin/layout :: sidebar"></nav>
+
+	<div id="page-wrapper">
+	    <div class="row">
+	        <div class="col-sm-12">
+	            <h3 class="page-header">Quản lý danh mục</h3>
+	        </div>
+	        <!-- /.col-sm-12 -->
+	    </div>
+	    <!-- /.row -->
+	
+	    <div class="row">
+	        <div class="col-sm-6 col-sm-offset-3">
+	            <div class="panel panel-primary">
+	                <div class="panel-heading">
+	                    Form danh mục
+	                </div>
+	                <!-- /.panel-heading -->
+	                <div class="panel-body">
+	                    <form action="#" th:action="@{/admin/category/save}" th:object="${category}" method="POST">
+	                    	 <input type="hidden" th:field="*{id}" />
+	                        <div class="form-group">
+	                            <label>Tên danh mục <span class="required">*</span></label>
+	                            <input type="text" class="form-control" th:field="*{name}" th:errorclass="field-error" /> 
+						        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></span>
+	                        </div>
+	                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Lưu</button>
+	                    </form>
+	                </div>
+	                <!-- /.panel-body -->
+	            </div>
+	            <!-- /.panel -->
+	        </div>
+	        <!-- /.col-sm-12 -->
+	    </div>
+	    <!-- /.row -->
+	</div>
+	<!-- /#page-wrapper -->
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/layout :: head"></head>
+<body>
+
+<div id="wrapper">
+
+	<nav th:replace="admin/layout :: sidebar"></nav>
+
+	<div id="page-wrapper">
+	    <div class="row">
+	        <div class="col-sm-12">
+	            <h3 class="page-header">Quản lý đơn hàng</h3>
+	        </div>
+	        <!-- /.col-sm-12 -->
+	    </div>
+	    <!-- /.row -->
+	
+	    <div class="row">
+	        <div class="col-sm-12">
+	            <div class="panel panel-primary">
+	                <div class="panel-heading">
+	                    Thông tin đơn hàng
+	                </div>
+	                <!-- /.panel-heading -->
+	                <div class="panel-body">
+	                    <div>
+	                        <!-- Nav tabs -->
+	                        <ul class="nav nav-tabs">
+	                            <li class="active"><a href="#cart" role="tab" data-toggle="tab">Giỏ hàng</a></li>
+	                            <li><a href="#detail" data-toggle="tab">Thông tin chi tiết</a></li>
+	                        </ul>
+	
+	                      <!-- Tab panes -->
+	                      <div class="tab-content">
+	                        <div class="tab-pane active" id="cart">
+	                            <table class="table table-bordered table-hover">
+	                                <tr>
+	                                    <th width="60%">Sản phẩm</th>
+	                                    <th width="15%" class="text-center">Giá tiền (VNĐ)</th>
+	                                    <th width="10%" class="text-center">Số lượng</th>
+	                                    <th width="15%" class="text-center">Thành tiền (VNĐ)</th>
+	                                </tr>
+	                                <tr th:each="item : ${order.items}">
+	                                    <td style="text-align:left;">
+	                                        <img th:src="@{/upload/{url}(url=${item.product.image})}" width="50px" height="50px" />
+	                                        <span th:text="${item.product.name}"></span>
+	                                    </td>
+	                                    <td th:inline="text">[[${#numbers.formatInteger(item.product.price,3,'COMMA')}]] đ</td>
+	                                    <td th:text="${item.quantity}"></td>
+	                                    <td th:inline="text">[[${#numbers.formatInteger(item.subTotal,3,'COMMA')}]] đ</td>
+	                                </tr>
+	                                <tr>
+	                                    <td colspan="3" style="text-align:right;"><strong>Tổng tiền</strong></td>
+	                                    <td><strong th:inline="text">[[${#numbers.formatInteger(order.total,3,'COMMA')}]] đ</strong></td>
+	                                </tr>
+	                            </table>
+	                        </div>
+	                        <div class="tab-pane" id="detail">
+	                            <table class="table table-bordered table-hover">
+	                            	<tr>
+	                                    <td><strong>Họ tên</strong></td>
+	                                    <td th:text="${order.name}"></td>
+	                                </tr>
+	                                <tr>
+	                                    <td><strong>Số điện thoại</strong></td>
+	                                    <td th:text="${order.phone}"></td>
+	                                </tr>
+	                                <tr>
+	                                    <td><strong>Địa chỉ</strong></td>
+	                                   	<td th:text="${order.address}"></td>
+	                                </tr>
+	                                <tr>
+	                                    <td><strong>Ghi chú</strong></td>
+	                                    <td th:text="${order.note}"></td>
+	                                </tr>
+	                            </table>
+	                        </div>
+	                      </div>
+	
+	                    </div>
+	                </div>
+	                <!-- /.panel-body -->
+	            </div>
+	            <!-- /.panel -->
+	        </div>
+	        <!-- /.col-sm-12 -->
+	    </div>
+	    <!-- /.row -->
+	</div>
+	<!-- /#page-wrapper -->
+
+</div>
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+ $(document).ready(function() {
+     $('#dataTables-example').DataTable({
+         responsive: true
+     });
+ });
+/*]]>*/
+</script>
+
+</body>
+</html>
