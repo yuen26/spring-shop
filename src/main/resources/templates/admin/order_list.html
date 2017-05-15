@@ -18,17 +18,17 @@
 	
 	    <div class="row">
 	        <div class="col-sm-10 col-sm-offset-1">
+	        	<div th:if="${success}" class="row alert alert-success alert-dismissible">
+			        <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+			        <span th:text="${success}"></span>
+			    </div>
+			    
 	            <div class="panel panel-primary">
 	                <div class="panel-heading">
 	                	Danh sách đơn hàng
 	                </div>
 	                <!-- /.panel-heading -->
 	                <div class="panel-body">
-	                	<div th:if="${success}" class="row alert alert-success alert-dismissible">
-					        <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-					        <span th:text="${success}"></span>
-					    </div>
-					    
 	                	<h4 th:if="${#lists.isEmpty(orders)}">Chưa có đơn hàng nào</h4>
 	                    
 	                    <table th:unless="${#lists.isEmpty(orders)}" width="100%" 

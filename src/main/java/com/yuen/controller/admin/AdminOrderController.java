@@ -33,7 +33,7 @@ public class AdminOrderController {
 		
 		redirect.addFlashAttribute("success", 
 				new StringBuilder().append("Xóa đon hàng ").append(id).append(" thành công").toString());
-		return "redirect:/admin/order_list";
+		return "redirect:/admin/order";
 	}
 	
 }

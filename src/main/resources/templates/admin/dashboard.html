@@ -141,18 +141,13 @@
 		                                        </button>
 		                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 		                                            <li>
-		                                            	<a th:href="@{/order/{id}(id=${order.id})}">
+		                                            	<a th:href="@{/admin/order/{id}(id=${order.id})}">
 		                                            		Xem đơn hàng
 		                                            	</a>
 		                                            </li>
 		                                            <li>
-		                                            	<a th:href="@{/order/{id}/update(id=${order.id})}">
-		                                            		Cập nhật đơn hàng
-		                                            	</a>
-		                                            </li>
-		                                            <li>
-		                                            	<a th:href="@{/order/{id}/cancel(id=${order.id})}">
-		                                            		Hủy đơn hàng
+		                                            	<a th:href="@{/admin/order/{id}/cancel(id=${order.id})}">
+		                                            		Xóa đơn hàng
 		                                            	</a>
 		                                            </li>
 		                                        </ul>

@@ -26,6 +26,7 @@
 	                <div class="panel-body">
 	                    <form th:action="@{/admin/product/save}" th:object="${product}" method="POST">
 	                    	<input type="hidden" th:field="*{id}" />
+	                    	<input type="hidden" th:field="*{image}" />
 	                        <div class="form-group">
 	                            <label>Tên sản phẩm <span class="required">*</span></label>
 	                            <input type="text" class="form-control" th:field="*{name}" th:errorclass="field-error" /> 
@@ -36,11 +37,6 @@
                                 <textarea th:field="*{description}" th:errorclass="field-error" 
                                 	id="description" class="form-control" rows="8"></textarea>
                                 <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error"></span>
-                                <!-- CKEditor -->
-                                <script th:src="@{/webjars/ckeditor/4.6.2/full/ckeditor.js}"></script>
-                                <script>
-                                    CKEDITOR.replace('description');
-                                </script>
                             </div>
                             <div class="form-group">
                                 <label>Danh mục</label>
