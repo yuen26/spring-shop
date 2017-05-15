@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2017 at 04:13 AM
+-- Generation Time: May 15, 2017 at 01:23 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -54,21 +54,6 @@ CREATE TABLE `item` (
   `price` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `item`
---
-
-INSERT INTO `item` (`order_id`, `product_id`, `quantity`, `price`) VALUES
-(1000, 1, 1, 100000),
-(1000, 2, 2, 200000),
-(1001, 3, 4, 100000),
-(1002, 5, 1, 10000),
-(1003, 5, 1, 50000),
-(1004, 6, 2, 40000),
-(1004, 15, 2, 10000),
-(1005, 6, 2, 40000),
-(1005, 15, 2, 10000);
-
 -- --------------------------------------------------------
 
 --
@@ -84,18 +69,6 @@ CREATE TABLE `orders` (
   `created` datetime NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `name`, `phone`, `address`, `note`, `created`, `user_id`) VALUES
-(1000, 'Nguyễn Tuấn Anh', '0123456789', 'Hà Nội', NULL, '2017-05-11 00:00:00', 1),
-(1001, 'Bùi Quang Hoàng', '0123456789', 'Hà Nội', NULL, '2017-05-09 00:00:00', 2),
-(1002, 'Nguyễn Tuấn Anh', '0123456789', 'Hà Nội', NULL, '2017-05-01 00:00:00', 1),
-(1003, 'a', 'a', 'a', '', '2017-05-11 15:24:04', 1),
-(1004, 'Nguyen Tuan Anh', 'a', 'a', 'a', '2017-05-13 13:13:44', 1),
-(1005, 'a', 'a', 'a', 'a', '2017-05-13 13:24:38', 1);
 
 -- --------------------------------------------------------
 
@@ -171,8 +144,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `password`) VALUES
-(1, 'Nguyễn Tuấn Anh', 'nguyentuananh11b6@gmail.com', '$2a$10$Fd/rhPgkG6XbufIneTSMxeRFLCwl3OShb5J7woRqTIuepHTwK7XXO'),
-(2, 'Bui Quang Hoang', 'hoangbq@gmail.com', '$2a$10$lEYv0JlqJCsJ61Yl3QhBWOXoHhC67fDV0ylVcPHdKi00BJ6UYX5Zu');
+(1, 'Nguyễn Tuấn Anh', 'nguyentuananh11b6@gmail.com', '$2a$10$Fd/rhPgkG6XbufIneTSMxeRFLCwl3OShb5J7woRqTIuepHTwK7XXO');
 
 -- --------------------------------------------------------
 
@@ -191,8 +163,7 @@ CREATE TABLE `user_role` (
 
 INSERT INTO `user_role` (`user_id`, `role_id`) VALUES
 (1, 1),
-(1, 2),
-(2, 2);
+(1, 2);
 
 --
 -- Indexes for dumped tables
@@ -252,12 +223,12 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1006;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000;
 --
 -- AUTO_INCREMENT for table `product`
 --

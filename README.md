@@ -11,4 +11,4 @@
 ### Web
 
 ### API
-RESTful API for Android App
+RESTful API for Android.
