@@ -19,7 +19,7 @@ public class ApiProductController {
 	@Autowired
 	private ProductService productService;
 	
-	@GetMapping("/api/v1/products/latest")
+	@GetMapping("/api/v1/product/latest")
 	public ResponseEntity<List<Product>> findLatest() {
 		return new ResponseEntity<>(productService.findLatest(0, 10), HttpStatus.OK);
 	}
