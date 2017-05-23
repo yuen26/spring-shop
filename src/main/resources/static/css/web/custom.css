@@ -1,0 +1,30 @@
+/** Your theme modifications here **/
+#content {
+	min-height: 451px;
+}
+
+.buttons .btn {
+	padding-left: 5px;
+}
+
+#mainImage {
+	margin-bottom: 20px;
+}
+
+table tr td:nth-child(1) {
+	font-weight: bold;
+}
+
+#productMain .mainHeading {
+	font-weight: 300;
+	margin-bottom: 20px;
+}
+
+input[type="number"] {
+	width: 55px;
+	padding-right: 5px; 
+}
+
+.required {
+	color: #ff0000;
+}

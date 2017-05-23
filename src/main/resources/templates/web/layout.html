@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:fragment="head">
+
+    <meta charset="utf-8" />
+
+    <title>PizzaHut</title>
+
+    <link th:href="@{/images/favicon.png}" rel="shortcut icon" />
+
+    <!-- Bootstrap Core CSS -->
+	<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" />
+
+    <!-- theme stylesheet -->
+    <link href="@{/css/web/style.default.css}" rel="stylesheet" id="theme-stylesheet">
+
+    <!-- your stylesheet with modifications -->
+    <link href="@{/css/web/custom.css}" rel="stylesheet">
+    
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
+    <link th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+    <!-- *** TOPBAR *** -->
+    <div th:fragment="header" id="top">
+        <div class="container">
+            <div class="col-sm-6 col-sm-offset-6">
+                <ul sec:authorize="isAnonymous()" class="menu">
+                    <li>
+                        <a th:href="@{/login}">Login</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/register}">Register</a>
+                    </li>
+                </ul>
+                <ul sec:authorize="isAuthenticated()" class="menu">
+                    <li>
+                        <a th:href="@{/}" th:inline="text">Hello, [[#{authentication.user.name}]]</a>
+                    </li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')">
+                    	<a th:href="@{/admin}">Admin Control Panel</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/logout}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- *** TOP BAR END *** -->
+
+
+    <!-- *** NAVBAR *** -->
+
+    <div th:fragment="nav" class="navbar navbar-default yamm" role="navigation" id="navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand home" href="index.html" data-animate-hover="bounce">
+                    <img src="img/logo.png" alt="Obaju logo" class="hidden-xs" />
+                    <img src="img/logo-small.png" alt="Obaju logo" class="visible-xs" /> 
+                    <span class="sr-only">PizzaHut</span>
+                </a>
+                <div class="navbar-buttons">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <i class="fa fa-align-justify"></i>
+                    </button>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#search">
+                        <span class="sr-only">Toggle search</span>
+                        <i class="fa fa-search"></i>
+                    </button>
+                    <a th:href="@{/cart}" class="btn btn-default navbar-toggle">
+                        <i class="fa fa-shopping-cart"></i>  
+                        <span th:inline="text" class="hidden-xs">[[${#lists.size(${session.cart.items})}]] items in cart</span>
+                    </a>
+                </div>
+            </div>
+            <!--/.navbar-header -->
+
+            <div class="navbar-collapse collapse" id="navigation">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a class="active" th:href="@{/}">Home</a></li>
+                    <li><a href="@{/cart}">Shopping Cart</a></li>
+                    <li><a href="@{/checkout}">Checkout</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+
+            <div class="navbar-buttons">
+
+                <div class="navbar-collapse collapse right" id="basket-overview">
+                    <a href="cart.html" class="btn btn-primary navbar-btn">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span th:inline="text" class="hidden-sm">[[${#lists.size(${session.cart.items})}]] items in cart</span>
+                    </a>
+                </div>
+                <!--/.nav-collapse -->
+
+                <div class="navbar-collapse collapse right" id="search-not-mobile">
+                    <button type="button" class="btn navbar-btn btn-primary" data-toggle="collapse" data-target="#search">
+                        <span class="sr-only">Toggle search</span>
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="collapse clearfix" id="search">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                        </span>   
+                    </div>
+                </form>
+            </div>
+            <!--/.nav-collapse -->
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#navbar -->
+
+    <!-- *** NAVBAR END *** -->
+
+    <div id="all">
+
+        <div id="content">
+            <div class="container">
+
+                <div class="col-sm-3">
+                    <!-- *** MENUS AND FILTERS *** -->
+                    <div class="panel panel-default sidebar-menu">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Categories</h3>
+                        </div>
+
+                        <div class="panel-body">
+                            <ul class="nav nav-pills nav-stacked category-menu">
+                                <li><a href="category.html">Men</a></li>
+                                <li><a href="category.html">Ladies</a></li>
+                                <li><a href="category.html">Kids</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- *** MENUS AND FILTERS END *** -->
+                </div>
+
+                <div class="col-sm-9">
+                    <ul class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                        <li>Newest</li>
+                    </ul>
+
+                    <div class="row products">
+
+                        <div class="col-sm-4 col-sm-6">
+                            <div class="product">
+                                <a href="product.html">
+                                    <img src="img/product1.jpg" alt="Product" class="img-responsive">
+                                </a>
+                                <div class="text">
+                                    <h3><a href="product.html">Fur coat with very but very very long name</a></h3>
+                                    <p class="price">$143.00</p>
+                                    <p class="buttons">
+                                        <a href="product.html" class="btn btn-default"> 
+                                            <i class="fa fa-eye"></i>View detail
+                                        </a> 
+                                        <a href="cart.html" class="btn btn-primary"> 
+                                            <i class="fa fa-shopping-cart"></i>Add to cart
+                                        </a>
+                                    </p>
+                                </div>
+                                <!-- /.text -->
+                            </div>
+                            <!-- /.product -->
+                        </div>
+
+                        <div class="col-sm-4 col-sm-6">
+                            <div class="product">
+                                <a href="product.html">
+                                    <img src="img/product2.jpg" alt="Product" class="img-responsive">
+                                </a>
+                                <div class="text">
+                                    <h3><a href="product.html">White Blouse Armani</a></h3>
+                                    <p class="price"><del>$280</del> $143.00</p>
+                                    <p class="buttons">
+                                        <a href="product.html" class="btn btn-default"> 
+                                            <i class="fa fa-eye"></i>View detail
+                                        </a> 
+                                        <a href="cart.html" class="btn btn-primary"> 
+                                            <i class="fa fa-shopping-cart"></i>Add to cart
+                                        </a>
+                                    </p>
+                                </div>
+                                <!-- /.text -->
+                            </div>
+                            <!-- /.product -->
+                        </div>
+
+                        <div class="col-sm-4 col-sm-6">
+                            <div class="product">
+                                <a href="product.html">
+                                    <img src="img/product3.jpg" alt="Product" class="img-responsive">
+                                </a>
+                                <div class="text">
+                                    <h3><a href="product.html">Black Blouse Versace</a></h3>
+                                    <p class="price">$143.00</p>
+                                    <p class="buttons">
+                                        <a href="product.html" class="btn btn-default"> 
+                                            <i class="fa fa-eye"></i>View detail
+                                        </a> 
+                                        <a href="cart.html" class="btn btn-primary"> 
+                                            <i class="fa fa-shopping-cart"></i>Add to cart
+                                        </a>
+                                    </p>
+                                </div>
+                                <!-- /.text -->
+                            </div>
+                            <!-- /.product -->
+                        </div>
+
+                        <div class="col-sm-4 col-sm-6">
+                            <div class="product">
+                                <a href="product.html">
+                                    <img src="img/product3.jpg" alt="Product" class="img-responsive">
+                                </a>
+                                <div class="text">
+                                    <h3><a href="product.html">Black Blouse Versace</a></h3>
+                                    <p class="price">$143.00</p>
+                                    <p class="buttons">
+                                        <a href="product.html" class="btn btn-default"> 
+                                            <i class="fa fa-eye"></i>View detail
+                                        </a> 
+                                        <a href="cart.html" class="btn btn-primary"> 
+                                            <i class="fa fa-shopping-cart"></i>Add to cart
+                                        </a>
+                                    </p>
+
+                                </div>
+                                <!-- /.text -->
+                            </div>
+                            <!-- /.product -->
+                        </div>
+
+                        <div class="col-sm-4 col-sm-6">
+                            <div class="product">
+                                <a href="product.html">
+                                    <img src="img/product2.jpg" alt="Product" class="img-responsive">
+                                </a>
+                                <div class="text">
+                                    <h3><a href="product.html">White Blouse Versace</a></h3>
+                                    <p class="price">$143.00</p>
+                                    <p class="buttons">
+                                        <a href="product.html" class="btn btn-default"> 
+                                            <i class="fa fa-eye"></i>View detail
+                                        </a> 
+                                        <a href="cart.html" class="btn btn-primary"> 
+                                            <i class="fa fa-shopping-cart"></i>Add to cart
+                                        </a>
+                                    </p>
+                                </div>
+                                <!-- /.text -->
+                            </div>
+                            <!-- /.product -->
+                        </div>
+
+                        <div class="col-sm-4 col-sm-6">
+                            <div class="product">
+                                <a href="product.html">
+                                    <img src="img/product1.jpg" alt="Product" class="img-responsive">
+                                </a>
+                                <div class="text">
+                                    <h3><a href="product.html">Fur coat</a></h3>
+                                    <p class="price">$143.00</p>
+                                    <p class="buttons">
+                                        <a href="product.html" class="btn btn-default"> 
+                                            <i class="fa fa-eye"></i>View detail
+                                        </a> 
+                                        <a href="cart.html" class="btn btn-primary"> 
+                                            <i class="fa fa-shopping-cart"></i>Add to cart
+                                        </a>
+                                    </p>
+                                </div>
+                                <!-- /.text -->
+                            </div>
+                            <!-- /.product -->
+                        </div>
+                        <!-- /.col-sm-4 -->
+                    </div>
+                    <!-- /.products -->
+
+                    <!-- <div class="pages">
+
+                        <p class="loadMore">
+                            <a href="#" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i> Load more</a>
+                        </p>
+
+                        <ul class="pagination">
+                            <li><a href="#">&laquo;</a>
+                            </li>
+                            <li class="active"><a href="#">1</a>
+                            </li>
+                            <li><a href="#">2</a>
+                            </li>
+                            <li><a href="#">3</a>
+                            </li>
+                            <li><a href="#">4</a>
+                            </li>
+                            <li><a href="#">5</a>
+                            </li>
+                            <li><a href="#">&raquo;</a>
+                            </li>
+                        </ul>
+                    </div> -->
+
+                </div>
+                <!-- /.col-sm-9 -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+
+
+
+        <!-- *** FOOTER *** -->
+
+        <div id="copyright">
+            <div class="container">
+                <div class="col-sm-6">
+                    <p class="pull-left">© 2017 Yuen.</p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="pull-right">Template by <a href="https://bootstrapious.com/e-commerce-templates">Bootstrapious.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- /#copyright -->
+
+        <!-- *** FOOTER END *** -->
+
+    </div>
+    <!-- /#all -->
+    
+
+    <!-- *** SCRIPTS TO INCLUDE *** -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
